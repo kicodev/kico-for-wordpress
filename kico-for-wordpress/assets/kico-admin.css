@@ -1,0 +1,610 @@
+/*
+ * Settings > Kico. Kico's Graphite world in one place, the header band; the
+ * rest is wp-admin's own light surfaces, buttons and notices, so the page
+ * follows the admin colour scheme. Logical properties throughout, so RTL
+ * needs no second file. Fonts are bundled (SIL OFL 1.1, fonts/OFL.txt).
+ */
+
+@font-face {
+	font-family: "Kico Geist";
+	src: url("fonts/geist.woff2") format("woff2");
+	font-weight: 100 900;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Kico Geist Mono";
+	src: url("fonts/geist-mono.woff2") format("woff2");
+	font-weight: 100 900;
+	font-display: swap;
+}
+
+.kico {
+	--kico-graphite: #0e0e10;
+	--kico-graphite-line: #2c2c33;
+	--kico-on-graphite: #eeeef0;
+	--kico-on-graphite-2: #a9a9b3;
+	--kico-on-graphite-3: #8a8a94;
+	--kico-band-ok: #5ccf8f;
+	--kico-band-wait: #e9b44c;
+	--kico-band-fail: #f27a6a;
+
+	--kico-surface: #fff;
+	--kico-surface-2: #f6f7f7;
+	--kico-line: #dcdcde;
+	--kico-line-soft: #ececed;
+	--kico-text: #1d2327;
+	--kico-text-2: #50575e;
+	--kico-text-3: #646970;
+	--kico-ok: #007017;
+	--kico-ok-dot: #00a32a;
+	--kico-wait: #8a5a00;
+	--kico-wait-dot: #dba617;
+	--kico-fail: #b32d2e;
+	--kico-fail-dot: #d63638;
+	--kico-off-dot: #8c8f94;
+
+	--kico-sans: "Kico Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	--kico-mono: "Kico Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+	max-width: 1120px;
+	color: var(--kico-text);
+}
+
+.kico .kico-mono,
+.kico code,
+.kico .kico-args code {
+	font-family: var(--kico-mono);
+}
+
+.kico .kico-muted { color: var(--kico-text-3); }
+.kico .kico-strong { font-weight: 600; }
+.kico .kico-nowrap { white-space: nowrap; }
+
+.kico .kico-h1,
+.kico .kico-h2 {
+	font-family: var(--kico-sans);
+	font-weight: 600;
+	color: var(--kico-text);
+	margin: 0;
+	padding: 0;
+}
+
+.kico .kico-h1 { font-size: 22px; line-height: 1.25; letter-spacing: -0.01em; }
+.kico .kico-h2 { font-size: 15px; line-height: 1.4; }
+
+.kico .kico-label {
+	font-size: 11.5px;
+	font-weight: 500;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--kico-text-3);
+	margin: 0 0 6px;
+}
+
+/* --- The band ------------------------------------------------------------ */
+
+.kico .kico-band {
+	position: relative;
+	display: flex;
+	align-items: flex-start;
+	gap: 24px;
+	margin: 14px 0 20px;
+	padding: 20px 24px;
+	background: var(--kico-graphite);
+	color: var(--kico-on-graphite);
+	border-radius: 12px;
+	overflow: hidden;
+}
+
+.kico .kico-band__main {
+	position: relative;
+	z-index: 1;
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.kico .kico-band__title {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin: 0;
+	padding: 0;
+	font-family: var(--kico-sans);
+	font-size: 15px;
+	font-weight: 500;
+	line-height: 24px;
+	color: var(--kico-on-graphite-2);
+}
+
+.kico .kico-band__title img {
+	display: block;
+	height: 24px;
+	width: auto;
+}
+
+.kico .kico-band__status {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 4px 12px;
+	margin: 14px 0 0;
+	font-size: 13px;
+	color: var(--kico-on-graphite);
+}
+
+.kico .kico-band__meta { color: var(--kico-on-graphite-3); }
+.kico .kico-band__meta.kico-mono { font-size: 12.5px; color: var(--kico-on-graphite-2); }
+
+.kico .kico-band__lede {
+	max-width: 52ch;
+	margin: 22px 0 0;
+	font-family: var(--kico-sans);
+	font-size: 20px;
+	line-height: 1.4;
+	letter-spacing: -0.01em;
+	font-weight: 500;
+	color: var(--kico-on-graphite);
+	text-wrap: balance;
+}
+
+.kico .kico-band__version {
+	font-size: 12px;
+	font-weight: 400;
+	color: var(--kico-on-graphite-3);
+}
+
+.kico .kico-band--new {
+	min-height: 196px;
+	padding-block: 28px;
+	padding-inline-end: 260px;
+}
+
+/* The mascot stands at the band's end, cut off by its lower edge: never framed. */
+.kico .kico-band__mascot {
+	position: absolute;
+	inset-inline-end: 64px;
+	inset-block-start: 34px;
+	width: 150px;
+	height: auto;
+	pointer-events: none;
+}
+
+.kico .kico-band .kico-status--ok { color: var(--kico-band-ok); }
+.kico .kico-band .kico-status--wait { color: var(--kico-band-wait); }
+.kico .kico-band .kico-status--fail { color: var(--kico-band-fail); }
+.kico .kico-band .kico-status--off { color: var(--kico-on-graphite-2); }
+.kico .kico-band .kico-status--off .kico-dot { background: var(--kico-on-graphite-3); }
+
+/* wp-admin puts notices after this; it draws nothing. */
+.kico .wp-header-end { margin: 0; }
+
+/* --- Status: a dot and a word ------------------------------------------- */
+
+.kico .kico-status {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	font-weight: 500;
+}
+
+.kico .kico-dot {
+	flex: none;
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: currentColor;
+}
+
+.kico .kico-status--ok { color: var(--kico-ok); }
+.kico .kico-status--ok .kico-dot { background: var(--kico-ok-dot); }
+.kico .kico-status--wait { color: var(--kico-wait); }
+.kico .kico-status--wait .kico-dot { background: var(--kico-wait-dot); }
+.kico .kico-status--fail { color: var(--kico-fail); }
+.kico .kico-status--fail .kico-dot { background: var(--kico-fail-dot); }
+.kico .kico-status--off { color: var(--kico-text-2); }
+.kico .kico-status--off .kico-dot { background: var(--kico-off-dot); }
+
+.kico .kico-band .kico-status--ok .kico-dot,
+.kico .kico-band .kico-status--wait .kico-dot { background: currentColor; }
+
+/* --- Panels and sections ------------------------------------------------- */
+
+.kico .kico-panel {
+	margin: 0 0 20px;
+	padding: 24px;
+	background: var(--kico-surface);
+	border: 1px solid var(--kico-line);
+	border-radius: 9px;
+}
+
+.kico .kico-section { margin: 28px 0; }
+
+.kico .kico-section > .kico-h2,
+.kico .kico-section__head { margin-block-end: 6px; }
+
+.kico .kico-section__head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: 6px 16px;
+}
+
+.kico .kico-section .description { margin: 0 0 12px; }
+
+.kico .kico-empty {
+	margin: 0;
+	padding: 20px 24px;
+	color: var(--kico-text-2);
+	background: var(--kico-surface);
+	border: 1px dashed var(--kico-line);
+	border-radius: 9px;
+}
+
+/* --- Not connected: the connect panel ----------------------------------- */
+
+.kico .kico-start {
+	display: grid;
+	grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+	gap: 32px;
+	align-items: start;
+}
+
+.kico .kico-start:has(> :only-child) { grid-template-columns: minmax(0, 1fr); }
+
+.kico .kico-connect { margin-block-start: 14px; }
+.kico .kico-connect p { margin: 0 0 14px; }
+.kico .kico-connect p:last-child { margin: 0; }
+.kico .kico-connect .description { max-width: 62ch; }
+
+.kico .kico-field label {
+	display: block;
+	margin-block-end: 6px;
+	font-weight: 500;
+}
+
+.kico .kico-field input[type="url"] {
+	font-size: 13px;
+	max-width: 100%;
+}
+
+.kico .kico-steps {
+	counter-reset: kico-step;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	border-inline-start: 1px solid var(--kico-line-soft);
+	padding-inline-start: 28px;
+}
+
+.kico .kico-steps li {
+	counter-increment: kico-step;
+	position: relative;
+	margin: 0 0 18px;
+	padding-inline-start: 36px;
+	color: var(--kico-text-2);
+	line-height: 1.55;
+}
+
+.kico .kico-steps li:last-child { margin: 0; }
+
+.kico .kico-steps li::before {
+	content: counter(kico-step);
+	position: absolute;
+	inset-inline-start: 0;
+	inset-block-start: -1px;
+	width: 22px;
+	height: 22px;
+	border-radius: 6px;
+	background: var(--kico-surface-2);
+	border: 1px solid var(--kico-line);
+	color: var(--kico-text);
+	font: 500 12px/22px var(--kico-mono);
+	text-align: center;
+}
+
+/* --- Pairing: the match code -------------------------------------------- */
+
+.kico .kico-pairing {
+	display: grid;
+	grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+	gap: 32px;
+	align-items: start;
+	border-color: var(--kico-wait-dot);
+}
+
+.kico .kico-pairing__code .kico-h2 { margin-block-end: 18px; }
+
+.kico .kico-code {
+	margin: 0;
+	font-size: 44px;
+	font-weight: 500;
+	line-height: 1.1;
+	letter-spacing: 0.12em;
+	font-variant-numeric: tabular-nums;
+	color: var(--kico-text);
+	white-space: nowrap;
+}
+
+.kico .kico-countdown {
+	margin: 10px 0 0;
+	font-size: 12.5px;
+	font-variant-numeric: tabular-nums;
+	color: var(--kico-wait);
+}
+
+.kico .kico-countdown.is-expired { color: var(--kico-fail); }
+
+.kico .kico-pairing__help {
+	padding-inline-start: 32px;
+	border-inline-start: 1px solid var(--kico-line-soft);
+}
+
+.kico .kico-pairing__help p { margin: 0 0 14px; max-width: 60ch; }
+
+.kico .kico-facts {
+	display: grid;
+	grid-template-columns: max-content 1fr;
+	gap: 6px 16px;
+	margin: 0 0 16px;
+}
+
+.kico .kico-facts dt { color: var(--kico-text-3); }
+.kico .kico-facts dd { margin: 0; }
+
+/* --- Tables -------------------------------------------------------------- */
+
+.kico .kico-table {
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 0;
+	background: var(--kico-surface);
+	border: 1px solid var(--kico-line);
+	border-radius: 9px;
+	overflow: hidden;
+}
+
+.kico .kico-table th {
+	padding: 10px 14px;
+	text-align: start;
+	font-size: 11.5px;
+	font-weight: 500;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--kico-text-3);
+	background: var(--kico-surface-2);
+	border-block-end: 1px solid var(--kico-line);
+}
+
+.kico .kico-table td {
+	padding: 12px 14px;
+	vertical-align: top;
+	border-block-end: 1px solid var(--kico-line-soft);
+}
+
+.kico .kico-table tbody tr:last-child td { border-block-end: 0; }
+.kico .kico-table tbody tr:hover td { background: #fbfbfb; }
+.kico .kico-table td.kico-mono { font-size: 12.5px; }
+.kico .kico-table td code { font-size: 12px; padding: 1px 5px; border-radius: 4px; background: var(--kico-surface-2); }
+.kico .kico-table .kico-sub { display: block; color: var(--kico-text-3); font-size: 12.5px; margin-block-start: 2px; }
+.kico .kico-table__action { text-align: end; width: 1%; white-space: nowrap; }
+.kico .kico-table__action form { margin: 0; }
+
+.kico .kico-table--audit td { padding-block: 9px; }
+.kico .kico-args { width: 46%; }
+.kico .kico-table td.kico-args code {
+	display: block;
+	padding: 0;
+	background: none;
+	color: var(--kico-text-2);
+	white-space: pre-wrap;
+	word-break: break-all;
+	font-size: 12px;
+	line-height: 1.5;
+}
+
+/* Danger: coral-red text on its edge, never filled (Kico), in wp-admin's own red. */
+.kico .button.kico-button-danger {
+	color: var(--kico-fail);
+	border-color: var(--kico-fail);
+	background: transparent;
+}
+
+.kico .button.kico-button-danger:hover,
+.kico .button.kico-button-danger:focus {
+	color: #8a2424;
+	border-color: #8a2424;
+	background: #fcf0f1;
+}
+
+/* --- Connect another account (connected) -------------------------------- */
+
+.kico .kico-disclosure { padding: 0; }
+
+.kico .kico-disclosure > summary {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 16px 24px;
+	cursor: pointer;
+	list-style: none;
+	border-radius: 9px;
+}
+
+.kico .kico-disclosure > summary::-webkit-details-marker { display: none; }
+
+.kico .kico-disclosure > summary::before {
+	content: "";
+	flex: none;
+	width: 6px;
+	height: 6px;
+	border-inline-end: 1.5px solid var(--kico-text-2);
+	border-block-end: 1.5px solid var(--kico-text-2);
+	transform: rotate(-45deg);
+	transition: transform 0.15s ease-out;
+}
+
+.kico[dir="rtl"] .kico-disclosure > summary::before,
+[dir="rtl"] .kico .kico-disclosure > summary::before { transform: rotate(135deg); }
+.kico .kico-disclosure[open] > summary::before { transform: rotate(45deg); }
+
+.kico .kico-disclosure > summary:focus-visible {
+	outline: 2px solid var(--wp-admin-theme-color, #2271b1);
+	outline-offset: -2px;
+}
+
+.kico .kico-disclosure > .kico-connect {
+	margin: 0;
+	padding: 0 24px 24px;
+}
+
+/* --- About: two-part rows ------------------------------------------------ */
+
+.kico .kico-about { padding-block: 0; }
+
+.kico .kico-row {
+	display: grid;
+	grid-template-columns: 220px minmax(0, 1fr);
+	gap: 8px 32px;
+	padding-block: 24px;
+	border-block-end: 1px solid var(--kico-line-soft);
+}
+
+.kico .kico-row:last-child { border-block-end: 0; }
+
+.kico .kico-prose { max-width: 72ch; }
+.kico .kico-prose p { margin: 0 0 12px; line-height: 1.6; }
+.kico .kico-prose p:last-child { margin: 0; }
+
+/* Square bullets, the tile's shape. */
+.kico .kico-list {
+	list-style: none;
+	margin: 0 0 14px;
+	padding: 0;
+}
+
+.kico .kico-list li {
+	position: relative;
+	margin: 0 0 6px;
+	padding-inline-start: 20px;
+	line-height: 1.6;
+}
+
+.kico .kico-list li::before {
+	content: "";
+	position: absolute;
+	inset-inline-start: 2px;
+	inset-block-start: 0.6em;
+	width: 7px;
+	height: 7px;
+	border-radius: 2px;
+	background: var(--kico-text);
+}
+
+/* --- Notices ------------------------------------------------------------- */
+
+.kico .kico-mail-failures ul { margin: 0 0 4px; }
+.kico .kico-mail-failures li { margin: 0 0 4px; }
+.kico .kico-mail-failures .kico-mono { font-size: 12px; color: var(--kico-text-2); }
+
+/* --- Narrow wp-admin ----------------------------------------------------- */
+
+@media (max-width: 1100px) {
+	.kico .kico-start { grid-template-columns: minmax(0, 1fr); }
+	.kico .kico-steps { border-inline-start: 0; padding-inline-start: 0; padding-block-start: 22px; border-block-start: 1px solid var(--kico-line-soft); }
+}
+
+@media (max-width: 960px) {
+	.kico .kico-pairing { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+	.kico .kico-pairing__help { padding-inline-start: 0; border-inline-start: 0; padding-block-start: 20px; border-block-start: 1px solid var(--kico-line-soft); }
+	.kico .kico-row { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 782px) {
+	.kico .kico-band { margin-block-start: 10px; padding: 18px; }
+	.kico .kico-band--new { min-height: 0; padding-inline-end: 150px; }
+	.kico .kico-band__mascot { width: 96px; inset-inline-end: 28px; inset-block-start: 30px; }
+	.kico .kico-band__lede { font-size: 17px; }
+	.kico .kico-panel { padding: 18px; }
+	.kico .kico-disclosure { padding: 0; }
+	.kico .kico-disclosure > summary { padding: 16px 18px; }
+	.kico .kico-disclosure > .kico-connect { padding: 0 18px 18px; }
+	.kico .kico-about { padding-block: 0; }
+	.kico .kico-row { padding-block: 18px; }
+	.kico .kico-code { font-size: 36px; }
+
+	/* Tables become one block per row, each value under its label. */
+	.kico .kico-table,
+	.kico .kico-table tbody,
+	.kico .kico-table tr,
+	.kico .kico-table td { display: block; width: auto; }
+	.kico .kico-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+	.kico .kico-table tr { padding: 12px 16px; border-block-end: 1px solid var(--kico-line); }
+	.kico .kico-table tbody tr:last-child { border-block-end: 0; }
+	.kico .kico-table tbody tr:hover td { background: none; }
+	.kico .kico-table td { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 0 12px; padding: 5px 0; border: 0; }
+	.kico .kico-table td > * { grid-column: 2; justify-self: start; min-width: 0; }
+	.kico .kico-table td::before { content: attr(data-label); color: var(--kico-text-3); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 13px; }
+	.kico .kico-table td.kico-table__action { display: block; text-align: start; padding-block-start: 10px; }
+	.kico .kico-table td.kico-table__action::before { content: none; }
+	.kico .kico-args { width: auto; }
+}
+
+@media (max-width: 480px) {
+	.kico .kico-band--new { padding-inline-end: 18px; }
+	.kico .kico-band--new .kico-band__main { padding-inline-end: 0; }
+	.kico .kico-band__mascot { display: none; }
+	.kico .kico-code { font-size: 32px; letter-spacing: 0.08em; }
+	.kico .kico-table td { grid-template-columns: 88px minmax(0, 1fr); gap: 0 10px; }
+	.kico .kico-connect .button-hero { width: 100%; text-align: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.kico .kico-disclosure > summary::before { transition: none; }
+}
+
+/* --- The page between wp-admin and Kico (Connect) ----------------------- */
+
+.kico-handoff {
+	margin: 0;
+	min-height: 100vh;
+	background: #f0f0f1;
+	color: #1d2327;
+	font: 14px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+.kico-handoff__main {
+	max-width: 560px;
+	margin: 0 auto;
+	padding: 40px 16px;
+}
+
+.kico-handoff .kico-band { margin-block-start: 0; }
+.kico-handoff .kico-handoff__panel .kico-h1 { margin-block-end: 20px; }
+.kico-handoff .kico-handoff__panel p { margin: 0 0 14px; }
+.kico-handoff .kico-handoff__panel .kico-code { margin-block-end: 18px; }
+
+.kico-handoff__actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 12px 20px;
+	margin-block-start: 22px !important;
+}
+
+.kico-handoff a { color: #2271b1; }
+
+/* Continuing to Kico: Kico's own primary button. */
+.kico-handoff .kico-btn {
+	min-height: 40px;
+	padding: 0 18px;
+	border: 0;
+	border-radius: 9px;
+	background: #5e6ad2;
+	color: #fff;
+	font: 500 14px/40px var(--kico-sans);
+	cursor: pointer;
+}
+
+.kico-handoff .kico-btn:hover { background: #5560c8; }
+.kico-handoff .kico-btn:focus-visible { outline: 2px solid #5e6ad2; outline-offset: 2px; }

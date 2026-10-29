@@ -1,0 +1,12 @@
+{
+  "name": "kico/kico-wp-sql-parser",
+  "description": "phpMyAdmin's SQL parser for Kico for WordPress, namespaced with php-scoper (build.sh).",
+  "license": "GPL-2.0-or-later",
+  "require": {
+    "phpmyadmin/sql-parser": "5.11.*"
+  },
+  "config": {
+    "platform": { "php": "7.4" },
+    "optimize-autoloader": true
+  }
+}
